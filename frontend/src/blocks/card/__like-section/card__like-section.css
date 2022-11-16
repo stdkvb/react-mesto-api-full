@@ -1,0 +1,10 @@
+.card__like-section {
+    grid-area: like-section;
+    height: 35px;
+    width: 22px;
+    margin: 22px 20px 22px 30px;
+    padding: 0;
+    justify-self: flex-end;
+    display: flex;
+    flex-direction: column;
+}

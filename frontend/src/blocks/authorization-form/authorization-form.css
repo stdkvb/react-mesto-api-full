@@ -1,0 +1,13 @@
+.authorization-form {
+    width: 358px;
+    display: flex;
+    margin: 60px auto 0 auto;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+    .authorization-form {
+        width: 260px;
+        min-height: 358px;
+    } 
+ }

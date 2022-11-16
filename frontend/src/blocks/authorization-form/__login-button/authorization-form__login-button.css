@@ -1,0 +1,23 @@
+.authorization-form__login-button {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-top: 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .authorization-form__login-button {
+        line-height: 17px;
+    } 
+ }
+
+.authorization-form__login-button:hover {
+    background-color: #000000;
+    opacity: 0.8;
+    cursor: pointer;
+}

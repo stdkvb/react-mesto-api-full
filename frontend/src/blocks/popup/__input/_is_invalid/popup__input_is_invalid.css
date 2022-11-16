@@ -1,0 +1,3 @@
+.popup__input_is_invalid {
+    border-bottom: solid 2px #FF0000;
+}

@@ -1,0 +1,10 @@
+.popup__container_no-form {
+    width: 100%;
+    max-width: 430px;
+    max-height: 330px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
