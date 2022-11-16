@@ -7,6 +7,7 @@ const { PORT = 3000 } = process.env;
 
 const router = require('./routes');
 const serverError = require('./middlewares/serverError');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
@@ -18,7 +19,9 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
+app.use(requestLogger);
 app.use(router);
+app.use(errorLogger);
 app.use(errors());
 app.use(serverError);
 
