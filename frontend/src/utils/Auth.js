@@ -1,4 +1,4 @@
-const BASE_URL = "https://tutvamne.mesto.nomoredomains.icu";
+const BASE_URL = 'http://localhost:3001'
 
 const handleError = (res) => {
   if (res.ok) {
@@ -14,6 +14,7 @@ export const register = (email, password) => {
       "Accept": "application/json",
       "Content-Type": "application/json",
     },
+    credentials: 'include',
     body: JSON.stringify({ email, password }),
   }).then(handleError);
 };
@@ -22,27 +23,28 @@ export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
+      "Accept": "application/json",
       "Content-Type": "application/json",
     },
+    credentials: 'include',
     body: JSON.stringify({ email, password }),
   })
     .then(handleError)
     .then((data) => {
-      if (data.token) {
-        localStorage.setItem("jwt", data.token);
+      if (data) {
         return data;
       }
     });
 };
 
-export const getContent = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: "GET",
+export const logout = () => {
+  return fetch(`${BASE_URL}/signout`, {
+    method: 'POST',
     headers: {
+      "Accept": "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
+    credentials: 'include',
   })
     .then(handleError)
-    .then((data) => data);
 };

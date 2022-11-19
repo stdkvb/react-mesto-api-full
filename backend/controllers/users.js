@@ -114,9 +114,10 @@ const login = (request, response, next) => {
             throw new NonAuthorisedError('Невереный email или пароль.');
           }
           const token = getJwtToken(user._id);
-          response.cookie('jwt', token, {
+          response.cookie('access_token', token, {
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: true,
+            sameSite: true,
           });
           return response.send({ message: 'Аутентификация выполнена', token });
         });
@@ -134,6 +135,16 @@ const getCurrentUser = (request, response, next) => {
     .catch(next);
 };
 
+const logout = (request, response, next) => {
+  response.cookie('access_token', 'jwt.token.revoked', {
+    httpOnly: true,
+    sameSite: true,
+  }).send({
+    message: 'Выход из системы',
+  })
+    .catch(next);
+};
+
 module.exports = {
-  getUsers, getUser, createUser, updateUser, updateAvatar, login, getCurrentUser,
+  getUsers, getUser, createUser, updateUser, updateAvatar, login, getCurrentUser, logout,
 };

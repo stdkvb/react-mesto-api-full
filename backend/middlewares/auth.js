@@ -3,17 +3,19 @@ const { JWT_SECRET } = require('../utils/jwt');
 const NonAuthorisedError = require('../errors/NonAuthorisedError');
 
 const checkAuthorisation = (request, response, next) => {
-  const { authorization } = request.headers;
-  if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new NonAuthorisedError('Необходимо авторизоваться.');
+  const cookie = request.cookies.access_token;
+
+  if (!cookie) {
+    next(new NonAuthorisedError('Необходима авторизоваться.'));
   }
-  const token = authorization.replace('Bearer ', '');
+
+  const token = cookie.replace('access_token', '');
 
   let payload;
   try {
     payload = jwt.verify(token, JWT_SECRET);
   } catch (error) {
-    next(new NonAuthorisedError('Необходимо авторизоваться'));
+    next(new NonAuthorisedError('Необходимо авторизоваться.'));
   }
 
   request.user = payload;

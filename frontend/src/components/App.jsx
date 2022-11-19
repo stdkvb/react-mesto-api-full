@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/api";
-import { register, authorize, getContent } from "../utils/Auth";
+import { register, authorize, logout } from "../utils/Auth";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
 import Register from "./Register";
@@ -36,16 +36,33 @@ function App() {
   const [successRegister, setSuccessRegister] = React.useState(false);
 
   React.useEffect(() => {
+    api.getUserInfo()
+      .then((res) => {
+        setEmail(res.email);
+        setLoggedIn(true);
+        history.push('/');
+      })
+      .catch(error => {
+        if (error === 400) {
+          console.log('400 - токен не передан или передан не в том формате');
+        } else if (error === 401) {
+          console.log('401 - переданный токен некорректен');
+        } else {
+          console.log(`${error.status} – ${error.statusText}`);
+        }
+      });
+  }, [history]);
+
+  React.useEffect(() => {
     if (loggedIn) {
-      api
-        .getData()
-        .then(([userInfo, cardsData]) => {
-          setCurrentUser(userInfo);
+      api.getData()
+        .then(([userData, cardsData]) => {
+          setCurrentUser(userData);
           setCards(cardsData);
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     }
-  }, [loggedIn]);
+  }, [loggedIn, history]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -116,7 +133,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -183,30 +200,10 @@ function App() {
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem("jwt");
+    logout();
+    history.push('/');
     setLoggedIn(false);
   };
-
-  React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      getContent(jwt)
-        .then((res) => {
-          setEmail(res.data.email);
-          setLoggedIn(true);
-          history.push("/");
-        })
-        .catch((error) => {
-          if (error === 400) {
-            console.log("400 - токен не передан или передан не в том формате");
-          } else if (error === 401) {
-            console.log("401 - переданный токен некорректен");
-          } else {
-            console.log(`${error.status} – ${error.statusText}`);
-          }
-        });
-    }
-  }, [history]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

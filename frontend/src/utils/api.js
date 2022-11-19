@@ -23,6 +23,7 @@ class Api {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
+      credentials: 'include',
     });
   }
 
@@ -30,6 +31,7 @@ class Api {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: userInfo.name,
         about: userInfo.about,
@@ -41,6 +43,7 @@ class Api {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: link.avatar,
       }),
@@ -51,6 +54,7 @@ class Api {
     return this._request(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: this._headers,
+      credentials: 'include',
     });
   }
 
@@ -58,6 +62,7 @@ class Api {
     return this._request(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -69,6 +74,7 @@ class Api {
     return this._request(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
+      credentials: 'include',
     });
   }
 
@@ -76,6 +82,7 @@ class Api {
     return this._request(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
+      credentials: 'include',
     });
   }
 
@@ -83,6 +90,7 @@ class Api {
     return this._request(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
+      credentials: 'include',
     });
   }
 
@@ -96,7 +104,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://tutvamne.mesto.nomoredomains.icu",
+  baseUrl: 'http://localhost:3001',
   headers: {
     "Accept": "application/json",
     "Content-Type": "application/json",
