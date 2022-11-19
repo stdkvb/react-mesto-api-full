@@ -96,9 +96,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-47",
+  baseUrl: "https://tutvamne.mesto.nomoredomains.icu",
   headers: {
-    authorization: "dbcecacf-b1f5-45b4-b0c5-067f006cc586",
+    "Accept": "application/json",
     "Content-Type": "application/json",
   },
 });
