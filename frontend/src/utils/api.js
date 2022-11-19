@@ -104,7 +104,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://tutvamne.mesto.nomoredomains.icu',
   headers: {
     "Accept": "application/json",
     "Content-Type": "application/json",
