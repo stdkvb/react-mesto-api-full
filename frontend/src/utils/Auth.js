@@ -1,4 +1,4 @@
-const BASE_URL = 'https://tutvamne.mesto.nomoredomains'
+const BASE_URL = 'https://tutvamne.mesto.nomoredomains.icu'
 
 const handleError = (res) => {
   if (res.ok) {

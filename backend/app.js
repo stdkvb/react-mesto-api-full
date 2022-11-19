@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const options = {
   origin: [
     'https://tutvamne.mesto.nomoredomains.icu',
+    'https://localhost:3000',
   ],
   allowedHeaders: ['Content-Type', 'origin'],
   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
