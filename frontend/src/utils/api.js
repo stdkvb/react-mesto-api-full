@@ -104,7 +104,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://tutvamne.mesto.nomoredomains.icu',
+  baseUrl: 'https://api.tutvamne.mesto.nomoredomains.club',
   headers: {
     "Accept": "application/json",
     "Content-Type": "application/json",
