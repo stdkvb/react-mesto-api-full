@@ -6,7 +6,7 @@ const checkAuthorisation = (request, response, next) => {
   const cookie = request.cookies.access_token;
 
   if (!cookie) {
-    next(new NonAuthorisedError('Необходима авторизоваться.'));
+    next(new NonAuthorisedError('Необходимо авторизоваться.'));
   }
 
   const token = cookie.replace('access_token', '');
