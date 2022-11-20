@@ -6,7 +6,7 @@ const checkAuthorisation = (request, response, next) => {
   const cookie = request.cookies.access_token;
 
   if (!cookie) {
-    next(new NonAuthorisedError('Необходимо авторизоваться.'));
+    throw new NonAuthorisedError('Необходимо авторизоваться.');
   }
 
   const token = cookie.replace('access_token', '');
@@ -15,7 +15,7 @@ const checkAuthorisation = (request, response, next) => {
   try {
     payload = jwt.verify(token, JWT_SECRET);
   } catch (error) {
-    next(new NonAuthorisedError('Необходимо авторизоваться.'));
+    next(new NonAuthorisedError('Необходимо авторизоваться'));
   }
 
   request.user = payload;
