@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { errors } = require('celebrate');
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 
 const router = require('./routes');
 const serverError = require('./middlewares/serverError');
