@@ -33,8 +33,8 @@ class Api {
         name: userInfo.name,
         about: userInfo.about,
       })
-      .then(this._handleError)
-    });
+    })
+    .then(this._handleError)
   }
 
   editAvatar(link) {
