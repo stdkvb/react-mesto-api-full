@@ -140,6 +140,7 @@ const logout = (request, response, next) => {
   response.cookie('access_token', 'jwt.token.revoked', {
     httpOnly: true,
     sameSite: 'none',
+    secure: 'true',
   }).send({
     message: 'Выход из системы',
   })
