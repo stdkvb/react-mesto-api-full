@@ -118,6 +118,7 @@ const login = (request, response, next) => {
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: true,
             sameSite: 'none',
+            secure: 'true',
           });
           return response.send({ message: 'Аутентификация выполнена', token });
         });
@@ -138,7 +139,7 @@ const getCurrentUser = (request, response, next) => {
 const logout = (request, response, next) => {
   response.cookie('access_token', 'jwt.token.revoked', {
     httpOnly: true,
-    sameSite: true,
+    sameSite: 'none',
   }).send({
     message: 'Выход из системы',
   })

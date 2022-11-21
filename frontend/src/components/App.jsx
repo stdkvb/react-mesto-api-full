@@ -112,8 +112,8 @@ function App() {
     setIsLoading(true);
     api
       .setUserInfo({ name, about })
-      .then((userData) => {
-        setCurrentUser(userData);
+      .then(() => {
+        setCurrentUser({...currentUser, name, about});
         setIsEditProfilePopupOpen(false);
       })
       .catch((err) => console.log(err))
