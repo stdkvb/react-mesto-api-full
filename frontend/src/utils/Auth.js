@@ -30,7 +30,7 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
     .then(handleError)
-    .then((data) => {
+    .then(data => {
       if (data) {
         return data;
       }
